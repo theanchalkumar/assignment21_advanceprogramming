@@ -1,0 +1,120 @@
+1.
+
+
+def only_alpha(string):
+    new=""
+    for i in string:
+        if i.isalpha():
+            new +=i
+    return new
+def count_same_ends(s):
+    s=s.lower()
+    s=s.split(" ")
+    count=0
+    s=[only_alpha(i) for i in s]
+    for i in s:
+        if i[0]==i[-1]:
+            if len(i) > 1:
+                count+=1
+    return count
+
+
+2.
+
+
+def atbash(string):
+    n = ord('z') + ord('a')
+    N = ord('A') + ord('Z')
+    ans=''
+    string=string.split(" ")
+    for s in string:
+        for i in s:
+            if i.isalpha(): 
+                if i.isupper():
+                    ans+=(chr(N-ord(i)))
+                else:
+                    ans+=(chr(n-ord(i)))
+            
+            else:
+                ans+=i
+        ans+=" "
+    ans=ans[:-1]
+    return ans
+
+3.
+
+class Employee:
+    def __init__(self, full_name, **kwargs):
+        self.name = full_name.split(' ')[0]
+        self.lastname = full_name.split(' ')[-1] 
+#         print(kwargs)
+        for var in kwargs:
+            if isinstance(kwargs[var], str):
+                exec("self.{0} = '{1}'".format(var,kwargs[var]))
+            else:
+                exec("self.{0} = {1}".format(var,kwargs[var]))
+
+
+     
+
+john = Employee("John Doe")
+mary = Employee("Mary Major", salary=120000)
+richard = Employee("Richard Roe", salary=110000, height=178)
+giancarlo = Employee("Giancarlo Rossi", salary=115000, height=182, nationality="Italian")
+
+
+4.
+
+
+def can_see_stage(mat):
+    for i in range(len(mat[0])):
+        new = True
+        for j in range(len(mat)-1,-1,-1):
+            if new == True:
+                max = mat[j][i]
+                new = False
+            elif (max<=mat[j][i]):
+                return False
+            else:
+                max = mat[j][i]
+            if j == 0:
+                new = True
+
+    return True
+
+
+5.
+
+
+order_number = 0
+class Pizza:
+    def __init__(self, *ingrd):
+        global order_number
+        order_number += 1
+        self.order_number = order_number
+        self.ingredients = ingrd[0]
+        
+    @classmethod
+    def garden_feast(self):
+        global order_number
+        order_number += 1
+        self.order_number = order_number
+        self.ingredients = ["spinach", "olives", "mushroom"]
+        return self
+        
+    @classmethod
+    def meat_festival(self):
+        global order_number
+        order_number += 1
+        self.order_number = order_number
+        self.ingredients = ['beef', 'meatball', 'bacon']
+        return self
+    
+    @classmethod    
+    def hawaiian(self):
+        global order_number
+        order_number += 1
+        self.order_number = order_number
+        self.ingredients = ['ham', 'pineapple']
+        return self
+
